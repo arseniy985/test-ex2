@@ -1,0 +1,21 @@
+services:
+  user-service:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    command: >
+      sh -c "wait-for-it db:5432 -- npx prisma migrate dev --name add_user_table && npm run start"
+
+  db:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
