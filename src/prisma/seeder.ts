@@ -8,7 +8,7 @@ const main = async () => {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     age: Math.floor(Math.random() * 100) + 1,
-    gender: Math.random() > 0.5 ? 'male' : 'female',
+    gender: Math.random() > 0.5 ? 'мужчина' : 'женщина',
     hasIssues: Math.random() > 0.5,
   }));
 
@@ -16,10 +16,10 @@ const main = async () => {
     await prisma.user.createMany({
       data: users.slice(i, i + 10000),
     });
-    console.log(`Inserted ${i + 10000} users`);
+    console.log(`Вставлено ${i + 10000} пользователей`);
   }
 
-  console.log('Database seeding completed.');
+  console.log('1.000.000 записей вставлено');
 };
 
 main()
